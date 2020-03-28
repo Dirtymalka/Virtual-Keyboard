@@ -1,0 +1,86 @@
+body {
+    margin: 0 auto;
+    font-size: 10px;
+    max-width: 1000px;
+    background: #eee;
+}
+
+.textarea {
+    margin: 0 auto;
+    width: 100%;
+    height: 200px;
+}
+
+.container {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.key {
+    box-sizing: border-box;
+    width: 55px;
+    height: 55px;
+    margin: 5px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #f9f9f9;
+    border-radius: 5px;
+    background: linear-gradient(to top, #228097, #185996);
+	box-shadow:
+	  -1px 0px rgb(52, 109, 161), -1px 1px rgb(47, 102, 184),
+	  -2px 1px rgb(51, 108, 160), -2px 2px rgb(46, 101, 183),
+	  -3px 2px rgb(50, 107, 159), -3px 3px rgb(45, 100, 182),
+	  -4px 3px rgb(49, 106, 158), -4px 4px rgb(44, 99, 181),
+	  -5px 4px rgb(48, 105, 157), -5px 5px rgb(43, 98, 180),
+	  -6px 5px rgb(47, 104, 156), -6px 6px rgb(42, 97, 179);
+}
+
+.key:hover {
+    background: #0a456d;
+    color: rgb(255, 255, 255);
+}
+
+.key.tap-shift {
+    flex-direction: column;
+}
+
+.tab {
+    width: 80px;
+}
+
+.capslock {
+    width: 100px;
+}
+
+.shift {
+    width: 132px;
+}
+
+.ctrl {
+    width: 65px;
+}
+
+.enter {
+    width: 165px;
+}
+
+.space {
+    width: 450px;
+}
+
+.backspace {
+    width: 145px;
+}
+
+.active {
+    background: #0a456d;
+    color: rgb(255, 255, 255);
+}
