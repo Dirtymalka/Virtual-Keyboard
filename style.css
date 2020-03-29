@@ -33,18 +33,12 @@ body {
     cursor: pointer;
     border: 1px solid #f9f9f9;
     border-radius: 5px;
-    background: linear-gradient(to top, #228097, #185996);
-	box-shadow:
-	  -1px 0px rgb(52, 109, 161), -1px 1px rgb(47, 102, 184),
-	  -2px 1px rgb(51, 108, 160), -2px 2px rgb(46, 101, 183),
-	  -3px 2px rgb(50, 107, 159), -3px 3px rgb(45, 100, 182),
-	  -4px 3px rgb(49, 106, 158), -4px 4px rgb(44, 99, 181),
-	  -5px 4px rgb(48, 105, 157), -5px 5px rgb(43, 98, 180),
-	  -6px 5px rgb(47, 104, 156), -6px 6px rgb(42, 97, 179);
+    background-color: rgb(255, 255, 255);
+    color: black;
 }
 
 .key:hover {
-    background: #0a456d;
+    background: #d1cfb4;
     color: rgb(255, 255, 255);
 }
 
@@ -61,7 +55,11 @@ body {
 }
 
 .shift {
-    width: 132px;
+    width: 90px;
+}
+
+ .enter + .shift {
+    width: 110px;
 }
 
 .ctrl {
@@ -88,11 +86,18 @@ body {
 .other-keys {
     background: none;
     box-shadow: none;
-    background-color: rgb(255, 255, 255);
-    color: black;
+    background: linear-gradient(to top, #228097, #185996);
+	box-shadow:
+	  -1px 0px rgb(52, 109, 161), -1px 1px rgb(47, 102, 184),
+	  -2px 1px rgb(51, 108, 160), -2px 2px rgb(46, 101, 183),
+	  -3px 2px rgb(50, 107, 159), -3px 3px rgb(45, 100, 182),
+	  -4px 3px rgb(49, 106, 158), -4px 4px rgb(44, 99, 181),
+	  -5px 4px rgb(48, 105, 157), -5px 5px rgb(43, 98, 180),
+	  -6px 5px rgb(47, 104, 156), -6px 6px rgb(42, 97, 179);
+
 }
 
 .active {
-    background: #0a456d;
+    background: #e6e1a8;
     color: rgb(255, 255, 255);
 }
