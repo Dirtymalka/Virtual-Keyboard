@@ -38,7 +38,7 @@ body {
 }
 
 .key:hover {
-    background: #d1cfb4;
+    background-color: rgba(219, 215, 176, 0.3);
     color: rgb(255, 255, 255);
 }
 
@@ -58,7 +58,7 @@ body {
     width: 90px;
 }
 
- .enter + .shift {
+.enter+.shift {
     width: 110px;
 }
 
@@ -78,26 +78,55 @@ body {
     width: 145px;
 }
 
+.right {
+    background-image: url(./img/right.svg);
+    background-size: contain;
+}
+
+.left {
+    background-image: url(./img/left.svg);
+    background-size: contain;
+}
+
+.up {
+    background-image: url(./img/up.svg);
+    background-size: contain;
+}
+
+.down {
+    background-image: url(./img/down.svg);
+    background-size: contain;
+}
+
+.special {
+    background-color: rgba(220, 231, 233, 0.774);
+}
+
 .key:active {
-    transform: translateY(2px);
-    filter: saturate(150%);
-  }
+    animation: anim-effect 0.5s ease-out forwards;
+}
+
+@keyframes anim-effect {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale3d(0.5, 0.5, 1);
+        transform: scale3d(0.5, 0.5, 1);
+    }
+    to {
+        opacity: 0;
+        -webkit-transform: scale3d(1.2, 1.2, 1);
+        transform: scale3d(1.2, 1.2, 1);
+    }
+}
 
 .other-keys {
     background: none;
     box-shadow: none;
     background: linear-gradient(to top, #228097, #185996);
-	box-shadow:
-	  -1px 0px rgb(52, 109, 161), -1px 1px rgb(47, 102, 184),
-	  -2px 1px rgb(51, 108, 160), -2px 2px rgb(46, 101, 183),
-	  -3px 2px rgb(50, 107, 159), -3px 3px rgb(45, 100, 182),
-	  -4px 3px rgb(49, 106, 158), -4px 4px rgb(44, 99, 181),
-	  -5px 4px rgb(48, 105, 157), -5px 5px rgb(43, 98, 180),
-	  -6px 5px rgb(47, 104, 156), -6px 6px rgb(42, 97, 179);
-
+    box-shadow: -1px 0px rgb(52, 109, 161), -1px 1px rgb(47, 102, 184), -2px 1px rgb(51, 108, 160), -2px 2px rgb(46, 101, 183), -3px 2px rgb(50, 107, 159), -3px 3px rgb(45, 100, 182), -4px 3px rgb(49, 106, 158), -4px 4px rgb(44, 99, 181), -5px 4px rgb(48, 105, 157), -5px 5px rgb(43, 98, 180), -6px 5px rgb(47, 104, 156), -6px 6px rgb(42, 97, 179);
 }
 
 .active {
-    background: #e6e1a8;
+    background: rgba(219, 215, 176, 0.8);;
     color: rgb(255, 255, 255);
 }
