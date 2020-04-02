@@ -164,7 +164,13 @@ function clickOnCapsLock() {
 
 // Click on Backspace
 function clickOnBackspace() {
-  textarea.value = textarea.value.slice(0, textarea.value.length - 1);
+  if (textarea.selectionStart === 0) return;
+  textarea.selectionEnd = textarea.selectionStart;
+  const cursor = textarea.selectionEnd;
+  const text = textarea.value.split('');
+  text.splice(textarea.selectionEnd - 1, 1);
+  textarea.value = text.join('');
+  textarea.selectionEnd = cursor - 1;
 }
 
 // Click on Ctrl
@@ -193,7 +199,14 @@ containerBoard.addEventListener('mousedown', (event) => {
   if (!activeButton) return;
   activeButton.classList.remove('active');
   activeButton.classList.add('active');
-  textarea.value += activeButton.querySelector('span') ? activeButton.querySelector('span').textContent : activeButton.textContent;
+
+  textarea.selectionEnd = textarea.selectionStart;
+  const cursor = textarea.selectionEnd;
+  const text = textarea.value.split('');
+  text.splice(textarea.selectionEnd, 0, (activeButton.querySelector('span') ? activeButton.querySelector('span').textContent : activeButton.textContent));
+  textarea.value = text.join('');
+  textarea.selectionEnd = cursor + 1;
+
   containerBoard.onmouseup = () => activeButton.classList.remove('active');
 });
 
@@ -268,27 +281,29 @@ containerBoard.addEventListener('mousedown', (event) => {
 
   // Click on Del
   if (event.target.classList.contains('del')) {
-    event.target.classList.toggle('active');
-    textarea.value = '';
-    this.onmouseup = () => event.target.classList.remove('active');
+    if (textarea.selectionStart === textarea.value.length) return;
+    textarea.selectionEnd = textarea.selectionStart;
+    const cursor = textarea.selectionEnd;
+    const text = textarea.value.split('');
+    text.splice(textarea.selectionEnd, 1);
+    textarea.value = text.join('');
+    textarea.selectionEnd = cursor;
   }
 
   // Click on Right Arrow
   if (event.target.classList.contains('right')) {
-    document.querySelector('.right').classList.toggle('active');
-    document.querySelector('.right').innerHTML = '&rarr;';
-    textarea.value += document.querySelector('.right').textContent;
-    document.querySelector('.right').innerHTML = '';
-    this.onmouseup = () => document.querySelector('.right').classList.remove('active');
+    if (textarea.selectionEnd === textarea.value.length) return;
+    const cursor = textarea.selectionStart;
+    textarea.selectionEnd = textarea.selectionStart;
+    textarea.selectionStart = cursor + 1;
   }
 
   // Click on Left Arrow
   if (event.target.classList.contains('left')) {
-    document.querySelector('.left').classList.toggle('active');
-    document.querySelector('.left').innerHTML = '&larr;';
-    textarea.value += document.querySelector('.left').textContent;
-    document.querySelector('.left').innerHTML = '';
-    this.onmouseup = () => document.querySelector('.left').classList.remove('active');
+    if (textarea.selectionStart === 0) return;
+    const cursor = textarea.selectionStart;
+    textarea.selectionStart = textarea.selectionEnd;
+    textarea.selectionEnd = cursor - 1;
   }
 
   // Click on Up Arrow
@@ -318,19 +333,23 @@ document.addEventListener('keydown', (event) => {
   const keys = containerBoard.querySelectorAll('div');
   const keysCtrl = containerBoard.querySelectorAll('.ctrl');
 
-  // Click on CapsLock
+  // Tap on CapsLock
   if (event.code === 'CapsLock') {
     clickOnCapsLock();
   }
 
-  // Click on Del
+  // Tap on Del
   if (event.code === 'Delete') {
-    event.target.classList.toggle('active');
-    textarea.value = '';
-    this.onkeyup = () => event.target.classList.remove('active');
+    if (textarea.selectionStart === textarea.value.length) return;
+    textarea.selectionEnd = textarea.selectionStart;
+    const cursor = textarea.selectionEnd;
+    const text = textarea.value.split('');
+    text.splice(textarea.selectionEnd, 1);
+    textarea.value = text.join('');
+    textarea.selectionEnd = cursor;
   }
 
-  // Click on Win
+  // Tap on Win
   if (event.code === 'MetaLeft') {
     event.target.classList.toggle('active');
     containerBoard.querySelectorAll('.key').forEach((elem) => {
@@ -338,25 +357,23 @@ document.addEventListener('keydown', (event) => {
     });
   }
 
-  // Click on Right Arrow
+  // Tap on Right Arrow
   if (event.code === 'ArrowRight') {
-    document.querySelector('.right').classList.toggle('active');
-    document.querySelector('.right').innerHTML = '&rarr;';
-    textarea.value += document.querySelector('.right').textContent;
-    document.querySelector('.right').innerHTML = '';
-    this.onkeyup = () => document.querySelector('.right').classList.remove('active');
+    if (textarea.selectionEnd === textarea.value.length) return;
+    const cursor = textarea.selectionStart;
+    textarea.selectionEnd = textarea.selectionStart;
+    textarea.selectionStart = cursor + 1;
   }
 
-  // Click on Left Arrow
+  // Tap on Left Arrow
   if (event.code === 'ArrowLeft') {
-    document.querySelector('.left').classList.toggle('active');
-    document.querySelector('.left').innerHTML = '&larr;';
-    textarea.value += document.querySelector('.left').textContent;
-    document.querySelector('.left').innerHTML = '';
-    this.onkeyup = () => document.querySelector('.left').classList.remove('active');
+    if (textarea.selectionStart === 0) return;
+    const cursor = textarea.selectionStart;
+    textarea.selectionStart = textarea.selectionEnd;
+    textarea.selectionEnd = cursor - 1;
   }
 
-  // Click on Up Arrow
+  // Tap on Up Arrow
   if (event.code === 'ArrowUp') {
     document.querySelector('.up').classList.toggle('active');
     document.querySelector('.up').innerHTML = '&uarr;';
@@ -365,7 +382,7 @@ document.addEventListener('keydown', (event) => {
     this.onkeyup = () => document.querySelector('.up').classList.remove('active');
   }
 
-  // Click on Down Arrow
+  // Tap on Down Arrow
   if (event.code === 'ArrowDown') {
     document.querySelector('.down').classList.toggle('active');
     document.querySelector('.down').innerHTML = '&darr;';
@@ -377,7 +394,7 @@ document.addEventListener('keydown', (event) => {
   for (let i = 0; i < eventWich.length; i += 1) {
     const activeButton = keys[i];
     if (eventWich[i] === event.code) {
-      // Click on Shift
+      // Tap on Shift
       if (keys[i].classList.contains('shift')) {
         keys[i].classList.toggle('active');
         if (keys[i].classList.contains('active')) {
@@ -405,7 +422,7 @@ document.addEventListener('keydown', (event) => {
         });
       }
 
-      // Click on Alt
+      // Tap on Alt
       if (containerBoard.querySelectorAll('div')[i].classList.contains('alt')) {
         containerBoard.querySelectorAll('div')[i].classList.toggle('active');
         if ((keysAlt[0].classList.contains('active') || keysAlt[1].classList.contains('active')) && (keysCtrl[0].classList.contains('active') || keysCtrl[1].classList.contains('active'))) {
@@ -413,7 +430,7 @@ document.addEventListener('keydown', (event) => {
         }
       }
 
-      // Click on Ctrl
+      // Tap on Ctrl
       if (containerBoard.querySelectorAll('div')[i].classList.contains('ctrl')) {
         containerBoard.querySelectorAll('div')[i].classList.toggle('active');
         if ((keysAlt[0].classList.contains('active') || keysAlt[1].classList.contains('active')) && (keysCtrl[0].classList.contains('active') || keysCtrl[1].classList.contains('active'))) {
@@ -439,15 +456,18 @@ document.addEventListener('keydown', (event) => {
         this.onkeyup = () => activeButton.classList.remove('active');
       }
       if (activeButton.classList.contains('backspace')) {
-        textarea.value = textarea.value.slice(0, textarea.value.length - 1);
-        activeButton.classList.add('active');
-        this.onkeyup = () => activeButton.classList.remove('active');
+        clickOnBackspace();
       }
       if (activeButton.classList.contains('special')) return;
       if (!activeButton.classList.contains('key')) return;
       if (!activeButton) return;
       activeButton.classList.add('active');
-      textarea.value += activeButton.querySelector('span') ? activeButton.querySelector('span').textContent : activeButton.textContent;
+      textarea.selectionEnd = textarea.selectionStart;
+      const cursor = textarea.selectionEnd;
+      const text = textarea.value.split('');
+      text.splice(textarea.selectionEnd, 0, (activeButton.querySelector('span') ? activeButton.querySelector('span').textContent : activeButton.textContent));
+      textarea.value = text.join('');
+      textarea.selectionEnd = cursor + 1;
       this.onkeyup = () => activeButton.classList.remove('active');
     }
   }
