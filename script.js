@@ -186,13 +186,29 @@ containerBoard.addEventListener('mousedown', (event) => {
   const activeButton = event.target.closest('div');
 
   if (activeButton.classList.contains('space')) {
-    textarea.value += ' ';
+    textarea.selectionEnd = textarea.selectionStart;
+    const cursor = textarea.selectionEnd;
+    const text = textarea.value.split('');
+    text.splice(textarea.selectionEnd, 0, ' ');
+    textarea.value = text.join('');
+    textarea.selectionEnd = cursor + 1;
   }
   if (activeButton.classList.contains('tab')) {
-    textarea.value += '  ';
+    textarea.selectionEnd = textarea.selectionStart;
+    const cursor = textarea.selectionEnd;
+    const text = textarea.value.split('');
+    text.splice(textarea.selectionEnd, 0, '  ');
+    textarea.value = text.join('');
+    textarea.selectionEnd = cursor + 2;
   }
   if (activeButton.classList.contains('enter')) {
-    textarea.value += '\n';
+    textarea.selectionEnd = textarea.selectionStart;
+    const cursor = textarea.selectionEnd;
+    const text = textarea.value.split('');
+    const textSplice = text.splice(textarea.selectionEnd, textarea.value.length
+    - textarea.selectionStart);
+    textarea.value = `${text.join('')}\n${textSplice.join('')}`;
+    textarea.selectionEnd = cursor + 1;
   }
   if (activeButton.classList.contains('special')) return;
   if (!activeButton.classList.contains('key')) return;
@@ -329,6 +345,7 @@ containerBoard.addEventListener('mousedown', (event) => {
 // Tap on real keyboard
 document.addEventListener('keydown', (event) => {
   event.preventDefault();
+  event.target.classList.remove('active');
   const keysAlt = containerBoard.querySelectorAll('.alt');
   const keys = containerBoard.querySelectorAll('div');
   const keysCtrl = containerBoard.querySelectorAll('.ctrl');
@@ -441,19 +458,33 @@ document.addEventListener('keydown', (event) => {
 
       // Virtual field input
       if (activeButton.classList.contains('space')) {
-        textarea.value += ' ';
+        textarea.selectionEnd = textarea.selectionStart;
+        const cursor = textarea.selectionEnd;
+        const text = textarea.value.split('');
+        text.splice(textarea.selectionEnd, 0, ' ');
+        textarea.value = text.join('');
+        textarea.selectionEnd = cursor + 1;
         activeButton.classList.add('active');
         this.onkeyup = () => activeButton.classList.remove('active');
       }
       if (activeButton.classList.contains('tab')) {
-        textarea.value += '  ';
+        textarea.selectionEnd = textarea.selectionStart;
+        const cursor = textarea.selectionEnd;
+        const text = textarea.value.split('');
+        text.splice(textarea.selectionEnd, 0, '  ');
+        textarea.value = text.join('');
+        textarea.selectionEnd = cursor + 2;
         activeButton.classList.add('active');
         this.onkeyup = () => activeButton.classList.remove('active');
       }
       if (activeButton.classList.contains('enter')) {
-        textarea.value += '\n';
-        activeButton.classList.add('active');
-        this.onkeyup = () => activeButton.classList.remove('active');
+        textarea.selectionEnd = textarea.selectionStart;
+        const cursor = textarea.selectionEnd;
+        const text = textarea.value.split('');
+        const textSplice = text.splice(textarea.selectionEnd, textarea.value.length
+        - textarea.selectionStart);
+        textarea.value = `${text.join('')}\n${textSplice.join('')}`;
+        textarea.selectionEnd = cursor + 1;
       }
       if (activeButton.classList.contains('backspace')) {
         clickOnBackspace();
