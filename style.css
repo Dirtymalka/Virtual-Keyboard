@@ -130,3 +130,9 @@ body {
     background: rgba(219, 215, 176, 0.8);;
     color: rgb(255, 255, 255);
 }
+
+.info {
+    font-size: 1.3rem;
+    margin-top: 35px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
