@@ -1,6 +1,7 @@
 // Create Textarea
 const textarea = document.createElement('textarea');
 textarea.classList.add('textarea');
+textarea.placeholder = '1) Use Ctrl+Alt to change the language\n2) Use left and right arrows to move through the text\n3) The button Win is optional and only changes the style of the virtual keyboard\n4) Down and up arrows display themselves\n5) Buttons Ctrl, Alt, Shift, CapsLock are "sticky"\n6) Other buttons correspond to the real keyboard layout on windows ';
 textarea.setAttribute('autofocus', '');
 document.body.append(textarea);
 
@@ -9,11 +10,6 @@ const container = document.createElement('div');
 container.className = 'container';
 document.body.append(container);
 const containerBoard = document.querySelector('.container');
-
-const info = document.createElement('div');
-info.classList.add('info');
-info.innerHTML = 'Press Ctrl + Alt to change the language';
-document.body.append(info);
 
 const keyLayoutEnglishUnShift = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='];
 const keyLayoutEnglishShift = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+'];
