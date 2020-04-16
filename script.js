@@ -29,13 +29,20 @@ const keyLayoutRussianKeys = [
   'Ctrl', 'Win', 'Alt', 'space', 'Alt', 'Ctrl', 'Left', 'Down', 'Right',
 ];
 
-const eventWich = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace', 'Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', '', 'CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter', 'ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ShiftRight', 'ArrowUp', 'Delete', 'ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
+const eventWhich = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace', 'Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', '', 'CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter', 'ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ShiftRight', 'ArrowUp', 'Delete', 'ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
 
+const keyToLanguage = 'keyboard';
+const englishValue = 'eng';
+const russianValue = 'ru';
 
 // Create Keys
 function createKeys(keyLayoutUnShift, keyLayoutShift, keyLayoutKeys) {
-  if (keyLayoutUnShift === keyLayoutEnglishUnShift) containerBoard.classList.add('english');
-  if (keyLayoutUnShift === keyLayoutRussianUnShift) containerBoard.classList.add('russian');
+  if (keyLayoutUnShift === keyLayoutEnglishUnShift) {
+    containerBoard.classList.add('english');
+  }
+  if (keyLayoutUnShift === keyLayoutRussianUnShift) {
+    containerBoard.classList.add('russian');
+  }
   for (let i = 0; i < keyLayoutUnShift.length; i += 1) {
     const div = document.createElement('div');
     div.className = 'key tap-shift';
@@ -51,61 +58,51 @@ function createKeys(keyLayoutUnShift, keyLayoutShift, keyLayoutKeys) {
   keyLayoutKeys.forEach((key) => {
     const div = document.createElement('div');
     div.className = 'key';
+    const divClassList = (f, a) => {
+      div.classList.add(f);
+      div.classList.add(a);
+    };
     if (key === 'backspace') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'CapsLock') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'Tab') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'Shift') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'Ctrl') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'Win') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'Alt') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'space') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'Left') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'Up') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'Right') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'Down') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'Enter') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     if (key === 'Del') {
-      div.classList.add(key.toLowerCase());
-      div.classList.add('special');
+      divClassList(key.toLowerCase(), 'special');
     }
     div.innerHTML = key;
     containerBoard.append(div);
@@ -118,11 +115,13 @@ function createKeys(keyLayoutUnShift, keyLayoutShift, keyLayoutKeys) {
 }
 
 
-if (localStorage.getItem('keyboard') === 'eng') {
+if (localStorage.getItem(keyToLanguage) === englishValue) {
   createKeys(keyLayoutEnglishUnShift, keyLayoutEnglishShift, keyLayoutEnglishKeys);
-} else if (localStorage.getItem('keyboard') === 'rus') {
+} else if (localStorage.getItem(keyToLanguage) === russianValue) {
   createKeys(keyLayoutRussianUnShift, keyLayoutRussianShift, keyLayoutRussianKeys);
-} else createKeys(keyLayoutEnglishUnShift, keyLayoutEnglishShift, keyLayoutEnglishKeys);
+} else {
+  createKeys(keyLayoutEnglishUnShift, keyLayoutEnglishShift, keyLayoutEnglishKeys);
+}
 
 
 // Language Change
@@ -131,12 +130,12 @@ function languageChange() {
     containerBoard.classList.remove('russian');
     containerBoard.innerHTML = '';
     createKeys(keyLayoutEnglishUnShift, keyLayoutEnglishShift, keyLayoutEnglishKeys);
-    localStorage.setItem('keyboard', 'eng');
+    localStorage.setItem(keyToLanguage, englishValue);
   } else if (containerBoard.classList.contains('english')) {
     containerBoard.classList.remove('english');
     containerBoard.innerHTML = '';
     createKeys(keyLayoutRussianUnShift, keyLayoutRussianShift, keyLayoutRussianKeys);
-    localStorage.setItem('keyboard', 'rus');
+    localStorage.setItem(keyToLanguage, russianValue);
   }
 }
 
@@ -162,15 +161,26 @@ function clickOnCapsLock() {
   }
 }
 
+let cursor = 0;
+let text = 0;
+const cursorPosition = () => {
+  textarea.selectionEnd = textarea.selectionStart;
+  cursor = textarea.selectionEnd;
+  text = textarea.value.split('');
+};
+
+const textareaToString = () => {
+  textarea.value = text.join('');
+};
 
 // Click on Backspace
 function clickOnBackspace() {
-  if (textarea.selectionStart === 0) return;
-  textarea.selectionEnd = textarea.selectionStart;
-  const cursor = textarea.selectionEnd;
-  const text = textarea.value.split('');
+  if (textarea.selectionStart === 0) {
+    return;
+  }
+  cursorPosition();
   text.splice(textarea.selectionEnd - 1, 1);
-  textarea.value = text.join('');
+  textareaToString();
   textarea.selectionEnd = cursor - 1;
 }
 
@@ -181,82 +191,76 @@ function clickOnCtrl() {
 
 // Click on Del
 function clickOnDel() {
-  if (textarea.selectionStart === textarea.value.length) return;
-  textarea.selectionEnd = textarea.selectionStart;
-  const cursor = textarea.selectionEnd;
-  const text = textarea.value.split('');
+  if (textarea.selectionStart === textarea.value.length) {
+    return;
+  }
+  cursorPosition();
   text.splice(textarea.selectionEnd, 1);
-  textarea.value = text.join('');
+  textareaToString();
   textarea.selectionEnd = cursor;
 }
 
 // Click on Right Arrow
 function clickOnRightArrow() {
-  if (textarea.selectionEnd === textarea.value.length) return;
-  const cursor = textarea.selectionStart;
-  textarea.selectionEnd = textarea.selectionStart;
+  if (textarea.selectionEnd === textarea.value.length) {
+    return;
+  }
+  cursorPosition();
   textarea.selectionStart = cursor + 1;
 }
 
 // Click on Left Arrow
 function clickOnLeftArrow() {
-  if (textarea.selectionStart === 0) return;
-  const cursor = textarea.selectionStart;
-  textarea.selectionStart = textarea.selectionEnd;
+  if (textarea.selectionStart === 0) {
+    return;
+  }
+  cursorPosition();
   textarea.selectionEnd = cursor - 1;
 }
 
 // Click on Up Arrow
 function clickOnUpArrow() {
-  document.querySelector('.up').classList.toggle('active');
-  document.querySelector('.up').innerHTML = '&uarr;';
-  textarea.selectionEnd = textarea.selectionStart;
-  const cursor = textarea.selectionEnd;
-  const text = textarea.value.split('');
+  const up = document.querySelector('.up');
+  up.classList.toggle('active');
+  up.innerHTML = '&uarr;';
+  cursorPosition();
   text.splice(textarea.selectionEnd, 0, document.querySelector('.up').textContent);
-  textarea.value = text.join('');
+  textareaToString();
   textarea.selectionEnd = cursor + 1;
-  document.querySelector('.up').innerHTML = '';
+  up.innerHTML = '';
 }
 
 // Click on Down Arrow
 function clickOnDownArrow() {
-  document.querySelector('.down').classList.toggle('active');
-  document.querySelector('.down').innerHTML = '&darr;';
-  textarea.selectionEnd = textarea.selectionStart;
-  const cursor = textarea.selectionEnd;
-  const text = textarea.value.split('');
+  const down = document.querySelector('.down');
+  down.classList.toggle('active');
+  down.innerHTML = '&darr;';
+  cursorPosition();
   text.splice(textarea.selectionEnd, 0, document.querySelector('.down').textContent);
-  textarea.value = text.join('');
+  textareaToString();
   textarea.selectionEnd = cursor + 1;
-  document.querySelector('.down').innerHTML = '';
+  down.innerHTML = '';
 }
 
 // Click on Space
 function clickOnSpace() {
-  textarea.selectionEnd = textarea.selectionStart;
-  const cursor = textarea.selectionEnd;
-  const text = textarea.value.split('');
+  cursorPosition();
   text.splice(textarea.selectionEnd, 0, ' ');
-  textarea.value = text.join('');
+  textareaToString();
   textarea.selectionEnd = cursor + 1;
 }
 
 // Click on Tab
 function clickOnTab() {
-  textarea.selectionEnd = textarea.selectionStart;
-  const cursor = textarea.selectionEnd;
-  const text = textarea.value.split('');
+  cursorPosition();
   text.splice(textarea.selectionEnd, 0, '  ');
-  textarea.value = text.join('');
+  textareaToString();
   textarea.selectionEnd = cursor + 2;
 }
 
 // Click on Enter
 function clickOnEnter() {
-  textarea.selectionEnd = textarea.selectionStart;
-  const cursor = textarea.selectionEnd;
-  const text = textarea.value.split('');
+  cursorPosition();
   const textSplice = text.splice(textarea.selectionEnd, textarea.value.length
     - textarea.selectionStart);
   textarea.value = `${text.join('')}\n${textSplice.join('')}`;
@@ -279,15 +283,19 @@ containerBoard.addEventListener('mousedown', (event) => {
   if (activeButton.classList.contains('enter')) {
     clickOnEnter();
   }
-  if (activeButton.classList.contains('special')) return;
-  if (!activeButton.classList.contains('key')) return;
-  if (!activeButton) return;
+  if (activeButton.classList.contains('special')) {
+    return;
+  }
+  if (!activeButton.classList.contains('key')) {
+    return;
+  }
+  if (!activeButton) {
+    return;
+  }
   activeButton.classList.remove('active');
   activeButton.classList.add('active');
 
-  textarea.selectionEnd = textarea.selectionStart;
-  const cursor = textarea.selectionEnd;
-  const text = textarea.value.split('');
+  cursorPosition();
   text.splice(textarea.selectionEnd, 0, (activeButton.querySelector('span') ? activeButton.querySelector('span').textContent : activeButton.textContent));
   textarea.value = text.join('');
   textarea.selectionEnd = cursor + 1;
@@ -296,6 +304,35 @@ containerBoard.addEventListener('mousedown', (event) => {
 });
 
 // Click on Special Keys
+
+const changeToUpperCase = (keys) => {
+  keys.forEach((letter) => {
+    const letterF = letter;
+    if (!letter.classList.contains('tap-shift') && !letter.classList.contains('special')) {
+      letterF.textContent = letter.textContent.toUpperCase();
+    }
+  });
+};
+
+const changeToLowerCase = (keys) => {
+  keys.forEach((letter) => {
+    const letterF = letter;
+    if (!letter.classList.contains('tap-shift') && !letter.classList.contains('special')) {
+      letterF.textContent = letter.textContent.toLowerCase();
+    }
+  });
+};
+
+const tapOnShiftSpecial = (keys) => {
+  keys.forEach((key) => {
+    const keyS = key;
+    const supKeyContent = key.querySelector('sup').textContent;
+    const spanKeyContent = key.querySelector('span').textContent;
+    keyS.querySelector('sup').textContent = spanKeyContent;
+    keyS.querySelector('span').textContent = supKeyContent;
+  });
+};
+
 
 containerBoard.addEventListener('mousedown', (event) => {
   const keysAlt = containerBoard.querySelectorAll('.alt');
@@ -311,28 +348,12 @@ containerBoard.addEventListener('mousedown', (event) => {
     event.target.classList.toggle('active');
     const keys = containerBoard.querySelectorAll('div');
     if (event.target.classList.contains('active')) {
-      keys.forEach((letter) => {
-        const letterF = letter;
-        if (!letter.classList.contains('tap-shift') && !letter.classList.contains('special')) {
-          letterF.textContent = letter.textContent.toUpperCase();
-        }
-      });
+      changeToUpperCase(keys);
     } else {
-      keys.forEach((letter) => {
-        const letterF = letter;
-        if (!letter.classList.contains('tap-shift') && !letter.classList.contains('special')) {
-          letterF.textContent = letter.textContent.toLowerCase();
-        }
-      });
+      changeToLowerCase(keys);
     }
     const tapShiftKeys = containerBoard.querySelectorAll('.tap-shift');
-    tapShiftKeys.forEach((key) => {
-      const keyS = key;
-      const supKeyContent = key.querySelector('sup').textContent;
-      const spanKeyContent = key.querySelector('span').textContent;
-      keyS.querySelector('sup').textContent = spanKeyContent;
-      keyS.querySelector('span').textContent = supKeyContent;
-    });
+    tapOnShiftSpecial(tapShiftKeys);
   }
 
   // Click on Alt
@@ -395,7 +416,9 @@ containerBoard.addEventListener('mousedown', (event) => {
 
 // Tap on real keyboard
 document.addEventListener('keydown', (event) => {
-  if (eventWich.includes(event.code)) event.preventDefault();
+  if (eventWhich.includes(event.code)) {
+    event.preventDefault();
+  }
   event.target.classList.remove('active');
   const keysAlt = containerBoard.querySelectorAll('.alt');
   const keys = containerBoard.querySelectorAll('div');
@@ -448,49 +471,33 @@ document.addEventListener('keydown', (event) => {
     this.onkeyup = () => document.querySelector('.down').classList.remove('active');
   }
 
-  for (let i = 0; i < eventWich.length; i += 1) {
+  for (let i = 0; i < eventWhich.length; i += 1) {
     const activeButton = keys[i];
-    if (eventWich[i] === event.code) {
+    if (eventWhich[i] === event.code) {
       // Tap on Shift
       if (keys[i].classList.contains('shift')) {
-        // KeyboardEvent.repeat = false;
         keys[i].classList.toggle('active');
         if (keys[i].classList.contains('active')) {
-          keys.forEach((letter) => {
-            const letterF = letter;
-            if (!letter.classList.contains('tap-shift') && !letter.classList.contains('special')) {
-              letterF.textContent = letter.textContent.toUpperCase();
-            }
-          });
+          changeToUpperCase(keys);
         } else {
-          keys.forEach((letter) => {
-            const letterF = letter;
-            if (!letter.classList.contains('tap-shift') && !letter.classList.contains('special')) {
-              letterF.textContent = letter.textContent.toLowerCase();
-            }
-          });
+          changeToLowerCase(keys);
         }
         const tapShiftKeys = containerBoard.querySelectorAll('.tap-shift');
-        tapShiftKeys.forEach((key) => {
-          const keyS = key;
-          const supKeyContent = key.querySelector('sup').textContent;
-          const spanKeyContent = key.querySelector('span').textContent;
-          keyS.querySelector('sup').textContent = spanKeyContent;
-          keyS.querySelector('span').textContent = supKeyContent;
-        });
+        tapOnShiftSpecial(tapShiftKeys);
       }
 
+      const allKeys = containerBoard.querySelectorAll('div');
       // Tap on Alt
-      if (containerBoard.querySelectorAll('div')[i].classList.contains('alt')) {
-        containerBoard.querySelectorAll('div')[i].classList.toggle('active');
+      if (allKeys[i].classList.contains('alt')) {
+        allKeys[i].classList.toggle('active');
         if ((keysAlt[0].classList.contains('active') || keysAlt[1].classList.contains('active')) && (keysCtrl[0].classList.contains('active') || keysCtrl[1].classList.contains('active'))) {
           languageChange();
         }
       }
 
       // Tap on Ctrl
-      if (containerBoard.querySelectorAll('div')[i].classList.contains('ctrl')) {
-        containerBoard.querySelectorAll('div')[i].classList.toggle('active');
+      if (allKeys[i].classList.contains('ctrl')) {
+        allKeys[i].classList.toggle('active');
         if ((keysAlt[0].classList.contains('active') || keysAlt[1].classList.contains('active')) && (keysCtrl[0].classList.contains('active') || keysCtrl[1].classList.contains('active'))) {
           languageChange();
         }
@@ -516,15 +523,19 @@ document.addEventListener('keydown', (event) => {
       if (activeButton.classList.contains('backspace')) {
         clickOnBackspace();
       }
-      if (activeButton.classList.contains('special')) return;
-      if (!activeButton.classList.contains('key')) return;
-      if (!activeButton) return;
+      if (activeButton.classList.contains('special')) {
+        return;
+      }
+      if (!activeButton.classList.contains('key')) {
+        return;
+      }
+      if (!activeButton) {
+        return;
+      }
       activeButton.classList.add('active');
-      textarea.selectionEnd = textarea.selectionStart;
-      const cursor = textarea.selectionEnd;
-      const text = textarea.value.split('');
+      cursorPosition();
       text.splice(textarea.selectionEnd, 0, (activeButton.querySelector('span') ? activeButton.querySelector('span').textContent : activeButton.textContent));
-      textarea.value = text.join('');
+      textareaToString();
       textarea.selectionEnd = cursor + 1;
       this.onkeyup = () => activeButton.classList.remove('active');
     }
